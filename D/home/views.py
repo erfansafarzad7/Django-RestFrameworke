@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from django.contrib.auth.models import User
 from rest_framework import status
 from permissions import OwnerOrReadOnly
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 
 class Home(APIView):
@@ -18,6 +19,9 @@ class Home(APIView):
 
 
 class QuestionListView(APIView):
+    # throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    throttle_scope = 'questions'
+
     def get(self, request):
         questions = Question.objects.all()
         ser_data = QuestionSerializer(instance=questions, many=True).data
