@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
+    'drf_spectacular',
 
 ]
 
@@ -138,6 +139,13 @@ REST_FRAMEWORK = {
         # 'anon': '3/day',
         # 'user': '5/day',
         'questions': '3/minute',
-    }
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'drf',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
 }
 
